@@ -33,9 +33,10 @@ public class Main {
                     System.out.print("Author: ");
                     String author = sc.nextLine();
 
-                    library.addBook(new Book(id, title, author));
+                System.out.print("Enter Category: ");
+                String category = sc.nextLine();
+                library.addBook(new Book(id, title, author, category));
                     break;
-
                 case 2:
                     library.viewBooks();
                     break;
@@ -59,9 +60,12 @@ public class Main {
                     System.out.println("Goodbye!");
                     return;
 
+
                 default:
                     System.out.println("Invalid option");
+
             }
+
         }
     }
 }
