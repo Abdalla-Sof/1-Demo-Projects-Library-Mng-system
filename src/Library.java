@@ -1,5 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Library {
@@ -11,9 +9,18 @@ public class Library {
         System.out.println("Book added successfully.");
     }
 
+    public boolean bookExists(int id) {
+        for (Book b : books) {
+            if (b.id == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void viewBooks() {
         if (books.isEmpty()) {
-            System.out.println("No books available.");
+            System.out.println("No books in library.");
             return;
         }
 
@@ -29,52 +36,48 @@ public class Library {
                 return;
             }
         }
-        System.out.println("Book not found.");
+
+        System.out.println("No book found with ID: " + id);
     }
 
     public void issueBook(int id) {
         for (Book b : books) {
             if (b.id == id) {
+
                 if (!b.issued) {
                     b.issued = true;
                     System.out.println("Book issued successfully.");
                 } else {
                     System.out.println("Book already issued.");
                 }
+
                 return;
             }
         }
+
         System.out.println("Book not found.");
     }
 
     public void returnBook(int id) {
         for (Book b : books) {
+
             if (b.id == id) {
+
                 if (b.issued) {
                     b.issued = false;
-                    System.out.println("Book returned.");
+                    System.out.println("Book returned successfully.");
                 } else {
-                    System.out.println("This book was not issued.");
+                    System.out.println("Book was not issued.");
                 }
+
                 return;
             }
         }
+
         System.out.println("Book not found.");
     }
-    public void saveBooksToFile() {
-        try {
-            FileWriter writer = new FileWriter("books.txt");
 
-            for (Book b : books) {
-                writer.write(b.id + "," + b.title + "," + b.author + "," + b.issued + "\n");
-            }
-
-            writer.close();
-            System.out.println("Books saved to file.");
-
-        } catch (IOException e) {
-            System.out.println("Error saving file.");
-        }
+    public void totalBooks() {
+        System.out.println("Total books in library: " + books.size());
     }
 }
-
